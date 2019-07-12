@@ -1,6 +1,8 @@
 class ThemesController < ApplicationController
   before_action :find_theme, only: [:show]
   def show
+    @question = Question.new
+    @questions = Question.all
   end
 
   def create
