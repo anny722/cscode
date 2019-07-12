@@ -1,0 +1,31 @@
+.card-question {
+  overflow: hidden;
+  height: 120px;
+  background: white;
+  box-shadow: 0 0 5px rgba(120,120,120,0.1);
+  padding: 16px;
+  position: relative;
+  margin-top: 10px;
+}
+.card-question h2 {
+  margin: 0;
+  margin-top: 10px;
+}
+
+.card-question p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+.card-question a{
+ font-size: 12px;
+ line-height: 1.4;
+ opacity: .7;
+ margin-bottom: 0;
+ margin-top: 8px;
+ text-decoration: none;
+ color: #0E0000;
+}
+

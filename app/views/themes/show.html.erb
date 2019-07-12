@@ -1,2 +1,15 @@
-<h1>Themes#show</h1>
-<p>Find me in app/views/themes/show.html.erb</p>
+<!-- category name and theme name -->
+<h1><%= @theme.category.name.capitalize %>/<%= @theme.name.capitalize %></h1>
+<!-- form to create new question -->
+<%= simple_form_for([@theme, @question]) do |f| %>
+  <%= f.input :subject, placeholder: 'How to ... ?', label: false, class: 'ml-3' %>
+  <%= f.submit "New Question", class: "btn btn-outline-primary" %>
+<% end %>
+<!-- displaying all questions -->
+<% @questions.each do |question| %>
+  <div class="card-question">
+    <h2><%= question.subject.capitalize %>
+  </h2>
+    <p>Last updated <%= link_to question.updated_at, question_path(question), class: 'stretched-link' %></p>
+  </div>
+<% end %>

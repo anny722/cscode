@@ -1,0 +1,28 @@
+.card-tab{
+  border-left: 1px solid rgba(180,180,180, 0.3);
+  border-bottom: 1px solid rgba(180,180,180, 0.3);
+  border-right: 1px solid rgba(180,180,180, 0.3);
+  padding: 15px;
+  background: white;
+}
+.card-solution{
+  min-height: 30px;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 10px 0px;
+  // let to have white spaces at the beggining of line
+  white-space: pre;
+}
+.background-black{
+  background: #272822;
+  color: white;
+}
+.background-grey{
+  background: #EEF0F1;
+  color: rgba(50,50,50, 0.7);
+}
+.card-comment{
+  color: rgba(50,50,50, 0.9);
+  // don't collapse white spaces in one
+  white-space: pre-wrap;
+}
