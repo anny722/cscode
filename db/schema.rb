@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_12_190912) do
+ActiveRecord::Schema.define(version: 2019_07_12_192445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,28 @@ ActiveRecord::Schema.define(version: 2019_07_12_190912) do
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text "comment"
+    t.bigint "tab_id"
+    t.bigint "question_id"
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_comments_on_question_id"
+    t.index ["tab_id"], name: "index_comments_on_tab_id"
+  end
+
+  create_table "outputs", force: :cascade do |t|
+    t.text "output"
+    t.bigint "tab_id"
+    t.bigint "question_id"
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_outputs_on_question_id"
+    t.index ["tab_id"], name: "index_outputs_on_tab_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.string "subject"
     t.boolean "public", default: false
@@ -31,6 +53,25 @@ ActiveRecord::Schema.define(version: 2019_07_12_190912) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["theme_id"], name: "index_questions_on_theme_id"
+  end
+
+  create_table "solutions", force: :cascade do |t|
+    t.text "solution"
+    t.bigint "tab_id"
+    t.bigint "question_id"
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_solutions_on_question_id"
+    t.index ["tab_id"], name: "index_solutions_on_tab_id"
+  end
+
+  create_table "tabs", force: :cascade do |t|
+    t.string "name"
+    t.bigint "question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_tabs_on_question_id"
   end
 
   create_table "themes", force: :cascade do |t|
@@ -55,6 +96,13 @@ ActiveRecord::Schema.define(version: 2019_07_12_190912) do
   end
 
   add_foreign_key "categories", "users"
+  add_foreign_key "comments", "questions"
+  add_foreign_key "comments", "tabs"
+  add_foreign_key "outputs", "questions"
+  add_foreign_key "outputs", "tabs"
   add_foreign_key "questions", "themes"
+  add_foreign_key "solutions", "questions"
+  add_foreign_key "solutions", "tabs"
+  add_foreign_key "tabs", "questions"
   add_foreign_key "themes", "categories"
 end
