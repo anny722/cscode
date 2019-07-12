@@ -1,0 +1,38 @@
+.cards-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
+}
+.cards-container{
+ margin-top: 40px;
+}
+.card-category{
+  background-color: #302387;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  position: relative;
+}
+.card-category a{
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 32px;
+}
+.card-theme{
+  background-color: #06028C;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  position: relative;
+}
+.card-theme a{
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 28px;
+}
