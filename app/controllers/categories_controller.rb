@@ -17,6 +17,8 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    @theme = Theme.new
+    @themes = Theme.where(category: @category)
   end
 
   private

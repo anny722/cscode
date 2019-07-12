@@ -1,2 +1,19 @@
-<h1>Categories#show</h1>
-<p>Find me in app/views/categories/show.html.erb</p>
+<!-- category name -->
+<h1><%= @category.name.capitalize %></h1>
+<!-- form to create new theme -->
+<%= simple_form_for([@category, @theme]) do |f| %>
+  <%= f.input :name, placeholder: 'Theme name', label: false, class: 'ml-3' %>
+  <%= f.submit "New Theme", class: "btn btn-outline-primary" %>
+<% end %>
+<!-- theme index -->
+<div class="cards-container">
+  <div class="cards-grid">
+    <% @themes.each do |theme| %>
+      <div class="card-theme">
+        <%= link_to theme.name.capitalize, theme_path(theme), class: 'stretched-link' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
