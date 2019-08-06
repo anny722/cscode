@@ -11,12 +11,13 @@ class QuestionsController < ApplicationController
 
   def create
     @theme = Theme.find(params[:theme_id])
+    @category = @theme.category
     @question = Question.new(question_params)
     @question.theme = @theme
     if @question.save
-      redirect_to theme_path(@theme)
+      redirect_to category_path(@category)
     else
-      render 'themes/show'
+      render 'categories/show'
     end
   end
 
