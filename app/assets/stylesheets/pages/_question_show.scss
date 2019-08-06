@@ -26,3 +26,14 @@
   // don't collapse white spaces in one
   white-space: pre-wrap;
 }
+.tabs-content-container{
+  width: 80%;
+}
+.add-btns-container{
+  width: 20%;
+  display: flex;
+  justify-content: space-around;
+}
+.add-btns-content-container{
+  width: 80%;
+}
