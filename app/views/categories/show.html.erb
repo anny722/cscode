@@ -1,19 +1,83 @@
-<!-- category name -->
-<h1><%= @category.name.capitalize %></h1>
-<!-- form to create new theme -->
-<%= simple_form_for([@category, @theme]) do |f| %>
-  <%= f.input :name, placeholder: 'Theme name', label: false, class: 'ml-3' %>
-  <%= f.submit "New Theme", class: "btn btn-outline-primary" %>
-<% end %>
-<!-- theme index -->
-<div class="cards-container">
-  <div class="cards-grid">
-    <% @themes.each do |theme| %>
-      <div class="card-theme">
-        <%= link_to theme.name.capitalize, theme_path(theme), class: 'stretched-link' %>
+<div class="d-flex">
+  <!-- theme menu -->
+  <div class="menu-container">
+  <!-- category name -->
+    <div class="menu-padding d-flex justify-content-between align-items-center">
+      <h1 class='mb-0'><%= @category.name.capitalize %></h1>
+      <!-- btn to create new theme -->
+      <ul class="nav nav-pills">
+        <li class="nav-item btn-plus">
+          <a class="btn-plus-a btn-plus-theme nav-link" data-toggle="tab" href="add-theme"><i class="fas fa-plus-square"></i></a>
+        </li>
+      </ul>
+    </div>
+    <!-- form to create new theme -->
+    <div class="tab-content">
+      <div class="for-new-theme tab-background-theme card-tab tab-pane fade" id='add-theme'>
+        <%= simple_form_for([@category, @theme]) do |f| %>
+          <%= f.input :name, placeholder: 'Theme name', label: false, class: 'ml-3' %>
+          <%= f.submit "New Theme", class: "btn btn-outline-primary" %>
+        <% end %>
       </div>
+    </div>
+
+    <!-- all themes -->
+    <ul class="nav flex-column nav-pills">
+      <% @themes.each do |theme| %>
+        <% if @themes.first == theme  %>
+          <li class="nav-item theme-links">
+            <a class="btn-theme nav-link active" data-toggle="tab" href="#<%= theme.name %>" data-id="theme.id"><%= theme.name.capitalize %></a>
+          </li>
+        <% else %>
+          <li class="nav-item theme-links">
+            <a class="btn-theme nav-link" data-toggle="tab" href="#<%= theme.name %>" data-id="theme.id"><%= theme.name.capitalize %></a>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+
+  </div>
+  <!-- theme menu end -->
+
+  <!-- questions -->
+  <div class="tab-content container-questions">
+    <% @themes.each do |theme| %>
+      <% if theme.id == @themes.first.id %>
+        <div class="container-theme-questions card-tab tab-pane fade show active" id='<%= theme.name %>'>
+      <% else %>
+        <div class="container-theme-questions card-tab tab-pane fade" id='<%= theme.name %>'>
+      <% end %>
+          <div class="container-content-theme-questions">
+            <div class="d-flex justify-content-between">
+              <h2 class="theme-name"><%= theme.name.capitalize %></h2>
+              <!-- btn to create new question -->
+              <ul class="nav nav-pills">
+                <li class="nav-item btn-plus">
+                  <a class="btn-plus-a btn-plus-question nav-link" data-toggle="tab" data-id="<%= theme.id %>" href="#add-question-<%= theme.id %>"><i class="fas fa-plus-square"></i></a>
+                </li>
+              </ul>
+            </div>
+            <!-- form to create new question -->
+            <div class="tab-content">
+              <div class="for-new-question tab-background-question card-tab tab-pane fade" id='add-question-<%= theme.id %>'>
+                <%= simple_form_for([theme, @question]) do |f| %>
+                  <%= f.input :subject, placeholder: 'How to ... ?', label: false, class: 'ml-3' %>
+                  <%= f.submit "New Question", class: "btn btn-outline-primary" %>
+                <% end %>
+              </div>
+            </div>
+            <!-- displaying all questions -->
+            <% theme.questions.each do |question| %>
+              <div class="card-question">
+                <h2><%= question.subject.capitalize %></h2>
+                <p>Last updated <%= link_to question.updated_at, question_path(question), class: 'stretched-link' %></p>
+              </div>
+            <% end %>
+          </div>
+        </div>
     <% end %>
   </div>
+
 </div>
 
 
