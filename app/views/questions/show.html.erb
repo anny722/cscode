@@ -1,142 +1,144 @@
-<!-- Category name and Theme name -->
-<div class='link-category'>
-  <%= link_to category_path(@question.theme.category) do %>
-    <%= @question.theme.category.name.capitalize %>/<%= @question.theme.name.capitalize %>
-  <% end %>
-</div>
+<div class="container-application-mt">
+  <!-- Category name and Theme name -->
+  <div class='link-category'>
+    <%= link_to category_path(@question.theme.category) do %>
+      <%= @question.theme.category.name.capitalize %>/<%= @question.theme.name.capitalize %>
+    <% end %>
+  </div>
 
-<!-- Question -->
-<h1><%= @question.subject.capitalize %></h1>
+  <!-- Question -->
+  <h1><%= @question.subject.capitalize %></h1>
 
-<!-- tabs -->
-<!-- tab buttons -->
-<ul class="nav nav-tabs">
-  <% unless @question.tabs == [] %>
-    <% @question.tabs.each do |tab| %>
-      <% if @question.tabs.first == tab %>
-        <li class="nav-item">
-          <a class="nav-link tab-language active" data-toggle="tab" href="#<%= tab.name %>" data-name='<%= tab.name %>' data-id='<%= tab.id %>'><%= tab.name %></a>
-        </li>
-      <% else %>
-        <li class="nav-item">
-          <a class="nav-link tab-language" data-toggle="tab" href="#<%= tab.name %>" data-name='<%= tab.name %>' data-id='<%= tab.id %>'><%= tab.name %></a>
-        </li>
+  <!-- tabs -->
+  <!-- tab buttons -->
+  <ul class="nav nav-tabs">
+    <% unless @question.tabs == [] %>
+      <% @question.tabs.each do |tab| %>
+        <% if @question.tabs.first == tab %>
+          <li class="nav-item">
+            <a class="nav-link tab-language active" data-toggle="tab" href="#<%= tab.name %>" data-name='<%= tab.name %>' data-id='<%= tab.id %>'><%= tab.name %></a>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <a class="nav-link tab-language" data-toggle="tab" href="#<%= tab.name %>" data-name='<%= tab.name %>' data-id='<%= tab.id %>'><%= tab.name %></a>
+          </li>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
-  <li class="nav-item">
-    <a class="nav-link tab-language" data-toggle="tab" href="#new-tab"><i class="fas fa-plus"></i> Add a tab</a>
-  </li>
-</ul>
+    <li class="nav-item">
+      <a class="nav-link tab-language" data-toggle="tab" href="#new-tab"><i class="fas fa-plus"></i> Add a tab</a>
+    </li>
+  </ul>
 
-<!-- flex tab content and add btns -->
-<div class="tabs-and-add-buttons-container d-flex">
-  <!--  tabs content -->
-  <div class="tab-content tabs-content-container">
-    <!-- form for adding new tabs -->
-    <div class="for-tabs card-tab tab-pane fade" id='new-tab'>
-      <!-- add new tab -->
-      <%= simple_form_for([@question, @tab]) do |f| %>
-        <%= f.input :name, placeholder: 'Tab name', label: false, class: 'ml-3' %>
-        <%= f.submit "New Tab", class: "btn btn-outline-primary" %>
-      <% end %>
-    </div>
-    <% if @question.tabs != [] %>
-      <% @question.tabs.each do |tab|  %>
-        <% if @question.tabs.first == tab %>
-          <div class="for-tabs card-tab tab-pane fade show active" id='<%= tab.name %>'>
-        <% else %>
-          <div class="for-tabs card-tab tab-pane fade" id='<%= tab.name %>'>
+  <!-- flex tab content and add btns -->
+  <div class="tabs-and-add-buttons-container d-flex">
+    <!--  tabs content -->
+    <div class="tab-content tabs-content-container">
+      <!-- form for adding new tabs -->
+      <div class="for-tabs card-tab tab-pane fade" id='new-tab'>
+        <!-- add new tab -->
+        <%= simple_form_for([@question, @tab]) do |f| %>
+          <%= f.input :name, placeholder: 'Tab name', label: false, class: 'ml-3' %>
+          <%= f.submit "New Tab", class: "btn btn-outline-primary" %>
         <% end %>
-        <% all_solution = @all_solution.select do |solution| %>
-          <% solution.tab == tab %>
-        <% end %>
-        <% all_solution.each do |solution| %>
-          <% if solution.respond_to?('comment') %>
-            <div class="card-comment"><%= solution.comment %></div>
-          <% elsif solution.respond_to?('solution') %>
-            <div class='card-solution background-black'><%= solution.solution %></div>
+      </div>
+      <% if @question.tabs != [] %>
+        <% @question.tabs.each do |tab|  %>
+          <% if @question.tabs.first == tab %>
+            <div class="for-tabs card-tab tab-pane fade show active" id='<%= tab.name %>'>
           <% else %>
-            <div class='card-solution background-grey'><%= solution.output %></div>
+            <div class="for-tabs card-tab tab-pane fade" id='<%= tab.name %>'>
           <% end %>
-        <% end %>
-        </div>
-      <% end %>
-    <% else %>
-      <% unless @all_solution == [] %>
-        <div class="for-tabs card-tab">
-          <% @all_solution.each do |solution| %>
+          <% all_solution = @all_solution.select do |solution| %>
+            <% solution.tab == tab %>
+          <% end %>
+          <% all_solution.each do |solution| %>
             <% if solution.respond_to?('comment') %>
               <div class="card-comment"><%= solution.comment %></div>
             <% elsif solution.respond_to?('solution') %>
-              <div class="card-solution background-black"><%= solution.solution %></div>
+              <div class='card-solution background-black'><%= solution.solution %></div>
             <% else %>
               <div class='card-solution background-grey'><%= solution.output %></div>
             <% end %>
           <% end %>
-        </div>
+          </div>
+        <% end %>
+      <% else %>
+        <% unless @all_solution == [] %>
+          <div class="for-tabs card-tab">
+            <% @all_solution.each do |solution| %>
+              <% if solution.respond_to?('comment') %>
+                <div class="card-comment"><%= solution.comment %></div>
+              <% elsif solution.respond_to?('solution') %>
+                <div class="card-solution background-black"><%= solution.solution %></div>
+              <% else %>
+                <div class='card-solution background-grey'><%= solution.output %></div>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
+
+    <!--  buttons add comment solution output-->
+    <div class="add-btns-container">
+      <ul class="nav flex-column nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#comment"><i class="fas fa-plus"></i> Add a comment</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#solution"><i class="fas fa-plus"></i> Add a solution</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#output"><i class="fas fa-plus"></i> Add an output</a>
+        </li>
+      </ul>
+    </div>
   </div>
 
-  <!--  buttons add comment solution output-->
-  <div class="add-btns-container">
-    <ul class="nav flex-column nav-pills">
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#comment"><i class="fas fa-plus"></i> Add a comment</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#solution"><i class="fas fa-plus"></i> Add a solution</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#output"><i class="fas fa-plus"></i> Add an output</a>
-      </li>
-    </ul>
-  </div>
+
+    <!-- content add buttons cso=comment solution output -->
+    <div class="tab-content add-btns-content-container">
+      <div class="for-add-cso card-tab tab-pane fade" id='comment'>
+        <!-- add comment -->
+        <%= simple_form_for([@question, @comment]) do |f| %>
+          <% if @question.tabs != [] %>
+            <div class="form-tab-id">
+              <%= f.input :tab, :as => :hidden, input_html: {value: @first_tab_id} %>
+            </div>
+          <% end %>
+          <%= f.input :comment, placeholder: 'Write a comment', label: false, :input_html => {:rows => 4}, class: 'ml-3' %>
+          <%= f.submit "New Comment", class: "btn btn-outline-primary" %>
+        <% end %>
+      </div>
+
+      <div class="for-add-cso card-tab tab-pane fade" id='solution'>
+        <!-- add solution -->
+        <%= simple_form_for([@question, @solution]) do |f| %>
+          <% if @question.tabs != [] %>
+            <div class="form-tab-id">
+              <%= f.input :tab, :as => :hidden, input_html: {value: @first_tab_id} %>
+            </div>
+          <% end %>
+          <%= f.input :solution, placeholder: 'Write a solution', label: false, :input_html => {:rows => 10}, class: 'ml-3' %>
+          <%= f.submit "New Solution", class: "btn btn-outline-primary" %>
+        <% end %>
+      </div>
+
+      <div class="for-add-cso card-tab tab-pane fade" id='output'>
+        <!-- add output -->
+        <%= simple_form_for([@question, @output]) do |f| %>
+          <% if @question.tabs != [] %>
+            <div class="form-tab-id">
+              <%= f.input :tab, :as => :hidden, input_html: {value: @first_tab_id} %>
+            </div>
+          <% end %>
+          <%= f.input :output, placeholder: 'Output', label: false, :input_html => {:rows => 6}, class: 'ml-3' %>
+          <%= f.submit "New Output", class: "btn btn-outline-primary" %>
+        <% end %>
+      </div>
+    </div>
 </div>
-
-
-  <!-- content add buttons cso=comment solution output -->
-  <div class="tab-content add-btns-content-container">
-    <div class="for-add-cso card-tab tab-pane fade" id='comment'>
-      <!-- add comment -->
-      <%= simple_form_for([@question, @comment]) do |f| %>
-        <% if @question.tabs != [] %>
-          <div class="form-tab-id">
-            <%= f.input :tab, :as => :hidden, input_html: {value: @first_tab_id} %>
-          </div>
-        <% end %>
-        <%= f.input :comment, placeholder: 'Write a comment', label: false, :input_html => {:rows => 4}, class: 'ml-3' %>
-        <%= f.submit "New Comment", class: "btn btn-outline-primary" %>
-      <% end %>
-    </div>
-
-    <div class="for-add-cso card-tab tab-pane fade" id='solution'>
-      <!-- add solution -->
-      <%= simple_form_for([@question, @solution]) do |f| %>
-        <% if @question.tabs != [] %>
-          <div class="form-tab-id">
-            <%= f.input :tab, :as => :hidden, input_html: {value: @first_tab_id} %>
-          </div>
-        <% end %>
-        <%= f.input :solution, placeholder: 'Write a solution', label: false, :input_html => {:rows => 10}, class: 'ml-3' %>
-        <%= f.submit "New Solution", class: "btn btn-outline-primary" %>
-      <% end %>
-    </div>
-
-    <div class="for-add-cso card-tab tab-pane fade" id='output'>
-      <!-- add output -->
-      <%= simple_form_for([@question, @output]) do |f| %>
-        <% if @question.tabs != [] %>
-          <div class="form-tab-id">
-            <%= f.input :tab, :as => :hidden, input_html: {value: @first_tab_id} %>
-          </div>
-        <% end %>
-        <%= f.input :output, placeholder: 'Output', label: false, :input_html => {:rows => 6}, class: 'ml-3' %>
-        <%= f.submit "New Output", class: "btn btn-outline-primary" %>
-      <% end %>
-    </div>
-  </div>
 <!-- add link -->
 
 
