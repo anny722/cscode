@@ -4,6 +4,6 @@ class Question < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :solutions, dependent: :destroy
   has_many :outputs, dependent: :destroy
-  has_many :links, dependent: :destroy
+  #has_many :links, dependent: :destroy
   validates :subject, presence: true
 end
