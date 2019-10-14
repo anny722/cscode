@@ -1,14 +1,16 @@
 <!-- render partial form -->
-<div class="container-application-mt">
-  <%= render 'form', category: @category %>
+<% if current_user %>
+  <div class="container-application-mt">
+    <%= render 'form', category: @category %>
 
-  <div class="cards-container">
-    <div class="cards-grid">
-      <% @categories.each do |category| %>
-        <div class="card-category">
-          <%= link_to category.name.capitalize, category_path(category), class: 'stretched-link' %>
-        </div>
-      <% end %>
+    <div class="cards-container">
+      <div class="cards-grid">
+        <% @categories.each do |category| %>
+          <div class="card-category">
+            <%= link_to category.name.capitalize, category_path(category), class: 'stretched-link' %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
