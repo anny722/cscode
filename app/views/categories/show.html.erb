@@ -26,11 +26,11 @@
       <% @themes.each do |theme| %>
         <% if @themes.first == theme  %>
           <li class="nav-item theme-links">
-            <a class="btn-theme nav-link active" data-toggle="tab" href="#<%= theme.name %>" data-id="theme.id"><%= theme.name.capitalize %></a>
+            <a class="btn-theme nav-link active" data-toggle="tab" href="#<%= theme.name.parameterize %>" data-id="theme.id"><%= theme.name.capitalize %></a>
           </li>
         <% else %>
           <li class="nav-item theme-links">
-            <a class="btn-theme nav-link" data-toggle="tab" href="#<%= theme.name %>" data-id="theme.id"><%= theme.name.capitalize %></a>
+            <a class="btn-theme nav-link" data-toggle="tab" href="#<%= theme.name.parameterize %>" data-id="theme.id"><%= theme.name.capitalize %></a>
           </li>
         <% end %>
       <% end %>
@@ -43,9 +43,9 @@
   <div class="tab-content container-questions">
     <% @themes.each do |theme| %>
       <% if theme.id == @themes.first.id %>
-        <div class="container-theme-questions card-tab tab-pane fade show active" id='<%= theme.name %>'>
+        <div class="container-theme-questions card-tab tab-pane fade show active" id='<%= theme.name.parameterize %>'>
       <% else %>
-        <div class="container-theme-questions card-tab tab-pane fade" id='<%= theme.name %>'>
+        <div class="container-theme-questions card-tab tab-pane fade" id='<%= theme.name.parameterize %>'>
       <% end %>
           <div class="container-content-theme-questions">
             <div class="d-flex justify-content-between">

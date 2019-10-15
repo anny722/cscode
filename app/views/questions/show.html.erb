@@ -16,11 +16,11 @@
       <% @question.tabs.each do |tab| %>
         <% if @question.tabs.first == tab %>
           <li class="nav-item">
-            <a class="nav-link tab-language active" data-toggle="tab" href="#<%= tab.name %>" data-name='<%= tab.name %>' data-id='<%= tab.id %>'><%= tab.name %></a>
+            <a class="nav-link tab-language active" data-toggle="tab" href="#<%= tab.name.parameterize %>" data-name='<%= tab.name %>' data-id='<%= tab.id %>'><%= tab.name.parameterize %></a>
           </li>
         <% else %>
           <li class="nav-item">
-            <a class="nav-link tab-language" data-toggle="tab" href="#<%= tab.name %>" data-name='<%= tab.name %>' data-id='<%= tab.id %>'><%= tab.name %></a>
+            <a class="nav-link tab-language" data-toggle="tab" href="#<%= tab.name.parameterize %>" data-name='<%= tab.name %>' data-id='<%= tab.id %>'><%= tab.name.parameterize %></a>
           </li>
         <% end %>
       <% end %>
@@ -45,9 +45,9 @@
       <% if @question.tabs != [] %>
         <% @question.tabs.each do |tab|  %>
           <% if @question.tabs.first == tab %>
-            <div class="for-tabs card-tab tab-pane fade show active" id='<%= tab.name %>'>
+            <div class="for-tabs card-tab tab-pane fade show active" id='<%= tab.name.parameterize %>'>
           <% else %>
-            <div class="for-tabs card-tab tab-pane fade" id='<%= tab.name %>'>
+            <div class="for-tabs card-tab tab-pane fade" id='<%= tab.name.parameterize %>'>
           <% end %>
           <% all_solution = @all_solution.select do |solution| %>
             <% solution.tab == tab %>

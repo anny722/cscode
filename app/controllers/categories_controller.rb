@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
 
   def index
     @category = Category.new
-    @categories = Category.all
+    @categories = Category.where(user: current_user)
   end
 
   def create
