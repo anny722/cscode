@@ -87,11 +87,26 @@
           <div class="for-tabs card-tab">
             <% @all_solution.each do |solution| %>
               <% if solution.respond_to?('comment') %>
-                <div class="card-comment"><%= solution.comment %></div>
+                <div class="card-comment"><%= solution.comment %>
+                  <%= link_to comment_path(solution),
+                    method: :delete, class: "delete-comment-trash" do %>
+                    <i class="fas fa-trash-alt"></i>
+                 <% end %>
+                </div>
               <% elsif solution.respond_to?('solution') %>
-                <div class="card-solution background-black"><%= solution.solution %></div>
+                <div class="card-solution background-black"><%= solution.solution %>
+                  <%= link_to solution_path(solution),
+                    method: :delete, class: "delete-solution-trash" do %>
+                    <i class="fas fa-trash-alt"></i>
+                 <% end %>
+                </div>
               <% else %>
-                <div class='card-solution background-grey'><%= solution.output %></div>
+                <div class='card-solution background-grey'><%= solution.output %>
+                  <%= link_to output_path(solution),
+                    method: :delete, class: "delete-comment-trash" do %>
+                    <i class="fas fa-trash-alt"></i>
+                 <% end %>
+                </div>
               <% end %>
             <% end %>
           </div>
