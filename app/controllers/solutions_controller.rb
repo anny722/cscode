@@ -14,6 +14,12 @@ class SolutionsController < ApplicationController
     end
   end
 
+  def destroy
+    @solution = Solution.find(params[:id])
+    @solution.destroy
+    redirect_to question_path(@solution.question)
+  end
+
   def params_tab_present
     @tab = Tab.find(params[:solution][:tab]) if params[:solution][:tab].present?
     @solution.tab = @tab if params[:solution][:tab].present?

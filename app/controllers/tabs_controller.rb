@@ -10,6 +10,12 @@ class TabsController < ApplicationController
     end
   end
 
+  def destroy
+    @tab = Tab.find(params[:id])
+    @tab.destroy
+    redirect_to question_path(@tab.question)
+  end
+
   private
 
   def tab_params

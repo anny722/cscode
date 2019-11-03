@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :find_category, only: [:show]
+  before_action :find_category, only: [:show, :destroy]
 
   def index
     @category = Category.new
@@ -20,6 +20,11 @@ class CategoriesController < ApplicationController
     @theme = Theme.new
     @question = Question.new
     @themes = Theme.where(category: @category)
+  end
+
+  def destroy
+    @category.destroy
+    redirect_to root_path
   end
 
   private

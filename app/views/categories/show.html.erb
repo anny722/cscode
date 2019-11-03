@@ -26,10 +26,18 @@
       <% @themes.each do |theme| %>
         <% if @themes.first == theme  %>
           <li class="nav-item theme-links">
+            <%= link_to theme_path(theme),
+              method: :delete do %>
+              <i class="fas fa-trash-alt delete-theme-trash"></i>
+            <% end %>
             <a class="btn-theme nav-link active" data-toggle="tab" href="#<%= theme.name.parameterize %>" data-id="theme.id"><%= theme.name.capitalize %></a>
           </li>
         <% else %>
           <li class="nav-item theme-links">
+            <%= link_to theme_path(theme),
+              method: :delete do %>
+              <i class="fas fa-trash-alt delete-theme-trash"></i>
+            <% end %>
             <a class="btn-theme nav-link" data-toggle="tab" href="#<%= theme.name.parameterize %>" data-id="theme.id"><%= theme.name.capitalize %></a>
           </li>
         <% end %>
@@ -69,8 +77,14 @@
             <!-- displaying all questions -->
             <% theme.questions.each do |question| %>
               <div class="card-question">
-                <h2><%= question.subject.capitalize %></h2>
-                <p>Last updated <%= link_to question.updated_at, question_path(question), class: 'stretched-link' %></p>
+                <%= link_to question_path(question),
+                  method: :delete do %>
+                  <i class="fas fa-trash-alt delete-question-trash"></i>
+                <% end %>
+                <%= link_to question_path(question) do %>
+                  <h2><%= question.subject.capitalize %></h2>
+                  <p>Last updated <%= question.updated_at %></p>
+                <% end %>
               </div>
             <% end %>
           </div>

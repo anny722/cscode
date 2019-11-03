@@ -12,6 +12,7 @@
   margin: 10px 0px;
   // let to have white spaces at the beggining of line
   white-space: pre;
+  position: relative;
 }
 .background-black{
   background: #272822;
@@ -25,6 +26,7 @@
   color: rgba(50,50,50, 0.9);
   // don't collapse white spaces in one
   white-space: pre-wrap;
+  position: relative;
 }
 .tabs-content-container{
   width: 80%;
@@ -36,4 +38,29 @@
 }
 .add-btns-content-container{
   width: 80%;
+}
+.tab-position{
+  position: relative;
+}
+.delete-comment-trash{
+  color: black;
+  font-size: 16px;
+  position: absolute;
+  top: -18px;
+  right: 15px;
+  z-index: 999;
+}
+.delete-solution-trash{
+  color: white;
+  font-size: 16px;
+  position: absolute;
+  top: -8px;
+  right: 15px;
+  z-index: 999;
+}
+.delete-tab-trash{
+  color: grey;
+  position: absolute;
+  top: 1px;
+  right: 1px;
 }

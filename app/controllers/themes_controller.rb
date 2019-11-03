@@ -1,5 +1,5 @@
 class ThemesController < ApplicationController
-  before_action :find_theme, only: [:show]
+  before_action :find_theme, only: [:show, :destroy]
   def show
     @question = Question.new
     @questions = Question.all
@@ -14,6 +14,11 @@ class ThemesController < ApplicationController
     else
       render 'categories/show'
     end
+  end
+
+  def destroy
+    @theme.destroy
+    redirect_to category_path(@theme.category)
   end
 
   private

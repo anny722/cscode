@@ -14,6 +14,12 @@ class OutputsController < ApplicationController
     end
   end
 
+  def destroy
+    @output = Output.find(params[:id])
+    @output.destroy
+    redirect_to question_path(@output.question)
+  end
+
   def params_tab_present
     @tab = Tab.find(params[:output][:tab]) if params[:output][:tab].present?
     @output.tab = @tab if params[:output][:tab].present?

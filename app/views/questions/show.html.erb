@@ -15,11 +15,15 @@
     <% unless @question.tabs == [] %>
       <% @question.tabs.each do |tab| %>
         <% if @question.tabs.first == tab %>
-          <li class="nav-item">
+          <li class="nav-item tab-position">
             <a class="nav-link tab-language active" data-toggle="tab" href="#<%= tab.name.parameterize %>" data-name='<%= tab.name.parameterize %>' data-id='<%= tab.id %>'><%= tab.name %></a>
+            <%= link_to tab_path(tab),
+                  method: :delete, class: "delete-tab-trash" do %>
+                  <i class="fas fa-trash-alt"></i>
+                 <% end %>
           </li>
         <% else %>
-          <li class="nav-item">
+          <li class="nav-item tab-position">
             <a class="nav-link tab-language" data-toggle="tab" href="#<%= tab.name.parameterize %>" data-name='<%= tab.name.parameterize %>' data-id='<%= tab.id %>'><%= tab.name %></a>
           </li>
         <% end %>
@@ -54,11 +58,26 @@
           <% end %>
           <% all_solution.each do |solution| %>
             <% if solution.respond_to?('comment') %>
-              <div class="card-comment"><%= solution.comment %></div>
+              <div class="card-comment"><%= solution.comment %>
+                <%= link_to comment_path(solution),
+                  method: :delete, class: "delete-comment-trash" do %>
+                  <i class="fas fa-trash-alt"></i>
+                 <% end %>
+              </div>
             <% elsif solution.respond_to?('solution') %>
-              <div class='card-solution background-black'><%= solution.solution %></div>
+              <div class='card-solution background-black'><%= solution.solution %>
+                <%= link_to solution_path(solution),
+                  method: :delete, class: "delete-solution-trash" do %>
+                  <i class="fas fa-trash-alt"></i>
+                 <% end %>
+              </div>
             <% else %>
-              <div class='card-solution background-grey'><%= solution.output %></div>
+              <div class='card-solution background-grey'><%= solution.output %>
+                <%= link_to output_path(solution),
+                  method: :delete, class: "delete-comment-trash" do %>
+                  <i class="fas fa-trash-alt"></i>
+                 <% end %>
+              </div>
             <% end %>
           <% end %>
           </div>

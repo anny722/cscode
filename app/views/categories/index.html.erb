@@ -7,6 +7,10 @@
       <div class="cards-grid">
         <% @categories.each do |category| %>
           <div class="card-category">
+            <%= link_to category_path(category),
+              method: :delete do %>
+              <i class="fas fa-trash-alt delete-category-trash"></i>
+            <% end %>
             <%= link_to category.name.capitalize, category_path(category), class: 'stretched-link' %>
           </div>
         <% end %>

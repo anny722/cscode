@@ -12,6 +12,12 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    redirect_to question_path(@comment.question)
+  end
+
   def params_tab_present
     @tab = Tab.find(params[:comment][:tab]) if params[:comment][:tab].present?
     @comment.tab = @tab if params[:comment][:tab].present?

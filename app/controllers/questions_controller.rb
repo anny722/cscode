@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :find_question, only: [:show]
+  before_action :find_question, only: [:show, :destroy]
   def show
     @tab = Tab.new
     @comment = Comment.new
@@ -19,6 +19,11 @@ class QuestionsController < ApplicationController
     else
       render 'categories/show'
     end
+  end
+
+  def destroy
+    @question.destroy
+    redirect_to category_path(@question.theme.category)
   end
 
   # find all comments solutions and outputs for a question and sort by order
